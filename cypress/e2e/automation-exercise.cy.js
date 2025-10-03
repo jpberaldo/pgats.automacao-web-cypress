@@ -50,7 +50,7 @@ describe('Automation Exercise', () => {
         cy.get('b').should('be.visible').and('have.text', 'Account Created!');
 
         cy.get('[data-qa="continue-button"]').click();
-        cy.get(':nth-child(10) > a').should('be.visible').and('have.text', ` Logged in as ${discardUsername}`);
+        cy.get('i.fa-user').parent().should('be.visible').and('have.text', ` Logged in as ${discardUsername}`);
         cy.get('a[href="/delete_account"]').click();
         cy.get('h2.title.text-center').should('be.visible').and('have.text', 'Account Deleted!');
         cy.get('[data-qa="continue-button"]').click();
@@ -65,7 +65,7 @@ describe('Automation Exercise', () => {
         cy.get('[data-qa="login-password"]').type(validLoginPassword, { log: false });
         cy.contains('button', 'Login').click();
 
-        cy.get(':nth-child(10) > a').should('be.visible').and('have.text', ` Logged in as ${discardUsername}`);
+        cy.get('i.fa-user').parent().should('be.visible').and('have.text', ` Logged in as ${discardUsername}`);
 
     });
 
@@ -86,7 +86,7 @@ describe('Automation Exercise', () => {
         cy.get('[data-qa="login-email"]').type(validLoginEmail);
         cy.get('[data-qa="login-password"]').type(validLoginPassword, { log: false });
         cy.contains('button', 'Login').click();
-        cy.get(':nth-child(10) > a').should('be.visible').and('have.text', ` Logged in as ${discardUsername}`);
+        cy.get('i.fa-user').parent().should('be.visible').and('have.text', ` Logged in as ${discardUsername}`);
         cy.get('a[href="/logout"]').click();
         cy.url().should('includes', 'login');
 
