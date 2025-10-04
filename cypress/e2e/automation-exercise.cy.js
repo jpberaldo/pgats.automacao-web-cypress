@@ -2,7 +2,8 @@
 /// <reference types="@cypress/xpath" />
 
 import userData from '../fixtures/validUserData.json';
-import { getRandomEmail, getRandomName } from '../support/helpers';
+import { getRandomEmail, getRandomName } from '../support/helpers.js';
+import { navegarParaLogin } from '../modules/home/index.js';
 
 describe('Automation Exercise', () => {
 
@@ -19,7 +20,7 @@ describe('Automation Exercise', () => {
     it.only('Test Case 1: Register User', () => {
 
         const username = getRandomName();
-        cy.get('a[href="/login"]').click();
+        navegarParaLogin();
         cy.get('[data-qa="signup-name"]').type(username);
         cy.get('[data-qa="signup-email"]').type(getRandomEmail());
         cy.contains('button', 'Signup').click();
