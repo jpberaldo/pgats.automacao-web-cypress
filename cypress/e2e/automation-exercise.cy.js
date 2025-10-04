@@ -4,6 +4,11 @@
 
 describe('Automation Exercise', () => {
 
+    beforeEach(() => {
+        cy.visit('https://automationexercise.com/');
+        cy.get('a[href="/login"]').click();
+    });
+
     const discardUsername = 'user-discard';
     const validLoginEmail = 'jp-test-qa@test.com';
     const validLoginPassword = '123456';
@@ -12,8 +17,6 @@ describe('Automation Exercise', () => {
 
         const timestamp = new Date().getTime();
 
-        cy.visit('https://automationexercise.com/');
-        cy.get('a[href="/login"]').click();
         cy.get('[data-qa="signup-name"]').type(discardUsername);
         cy.get('[data-qa="signup-email"]').type(`jp-test-qa-${timestamp}@test.com`);
         cy.contains('button', 'Signup').click();
@@ -59,8 +62,6 @@ describe('Automation Exercise', () => {
 
     it('Test Case 2: Login User with correct email and password', () => {
 
-        cy.visit('https://automationexercise.com/');
-        cy.get('a[href="/login"]').click();
         cy.get('[data-qa="login-email"]').type(validLoginEmail);
         cy.get('[data-qa="login-password"]').type(validLoginPassword, { log: false });
         cy.contains('button', 'Login').click();
@@ -71,8 +72,6 @@ describe('Automation Exercise', () => {
 
     it('Test Case 3: Login User with incorrect email and password', () => {
 
-        cy.visit('https://automationexercise.com/');
-        cy.get('a[href="/login"]').click();
         cy.get('[data-qa="login-email"]').type('incorrectEmail@test.com');
         cy.get('[data-qa="login-password"]').type('incorrectPassword');
         cy.contains('button', 'Login').click();
@@ -81,8 +80,6 @@ describe('Automation Exercise', () => {
 
     it('Test Case 4: Logout User', () => {
 
-        cy.visit('https://automationexercise.com/');
-        cy.get('a[href="/login"]').click();
         cy.get('[data-qa="login-email"]').type(validLoginEmail);
         cy.get('[data-qa="login-password"]').type(validLoginPassword, { log: false });
         cy.contains('button', 'Login').click();
@@ -94,8 +91,6 @@ describe('Automation Exercise', () => {
 
     it('Test Case 5: Register User with existing email', () => {
 
-        cy.visit('https://automationexercise.com/');
-        cy.get('a[href="/login"]').click();
         cy.get('[data-qa="signup-name"]').type(discardUsername);
         cy.get('[data-qa="signup-email"]').type(validLoginEmail);
         cy.contains('button', 'Signup').click();
