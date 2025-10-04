@@ -1,22 +1,24 @@
 /// <reference types="cypress" />
 /// <reference types="@cypress/xpath" />
 
+import userData from '../fixtures/validUserData.json';
 
 describe('Automation Exercise', () => {
-
-    beforeEach(() => {
-        cy.visit('https://automationexercise.com/');
-        cy.get('a[href="/login"]').click();
-    });
 
     const discardUsername = 'user-discard';
     const validLoginEmail = 'jp-test-qa@test.com';
     const validLoginPassword = '123456';
 
+    beforeEach(() => {
+        cy.visit('https://automationexercise.com/');
+
+    });
+
+
     it('Test Case 1: Register User', () => {
 
         const timestamp = new Date().getTime();
-
+        cy.get('a[href="/login"]').click();
         cy.get('[data-qa="signup-name"]').type(discardUsername);
         cy.get('[data-qa="signup-email"]').type(`jp-test-qa-${timestamp}@test.com`);
         cy.contains('button', 'Signup').click();
@@ -62,6 +64,7 @@ describe('Automation Exercise', () => {
 
     it('Test Case 2: Login User with correct email and password', () => {
 
+        cy.get('a[href="/login"]').click();
         cy.get('[data-qa="login-email"]').type(validLoginEmail);
         cy.get('[data-qa="login-password"]').type(validLoginPassword, { log: false });
         cy.contains('button', 'Login').click();
@@ -72,6 +75,7 @@ describe('Automation Exercise', () => {
 
     it('Test Case 3: Login User with incorrect email and password', () => {
 
+        cy.get('a[href="/login"]').click();
         cy.get('[data-qa="login-email"]').type('incorrectEmail@test.com');
         cy.get('[data-qa="login-password"]').type('incorrectPassword');
         cy.contains('button', 'Login').click();
@@ -80,6 +84,7 @@ describe('Automation Exercise', () => {
 
     it('Test Case 4: Logout User', () => {
 
+        cy.get('a[href="/login"]').click();
         cy.get('[data-qa="login-email"]').type(validLoginEmail);
         cy.get('[data-qa="login-password"]').type(validLoginPassword, { log: false });
         cy.contains('button', 'Login').click();
@@ -91,11 +96,27 @@ describe('Automation Exercise', () => {
 
     it('Test Case 5: Register User with existing email', () => {
 
+        cy.get('a[href="/login"]').click();
         cy.get('[data-qa="signup-name"]').type(discardUsername);
         cy.get('[data-qa="signup-email"]').type(validLoginEmail);
         cy.contains('button', 'Signup').click();
         cy.xpath('//p[text()="Email Address already exist!"]').should('be.visible').and('have.text', 'Email Address already exist!');
 
     });
+
+    it('Test Case 6: Contact Us Form', () => {
+
+        cy.get('i.fa.fa-envelope').parent().click(); // ou a[href*=contact] para buscar por uma palavra
+        cy.get('[data-qa="name"]').type(discardUsername);
+        cy.get('[data-qa="email"]').type(validLoginEmail);
+        cy.get('[data-qa="subject"]').type('Testes upload');
+        cy.get('#message').type('Lore Ipsum');
+        cy.fixture('livro-teste.jpg', null).as('imagem');
+        cy.get('input[type="file"]').selectFile('@imagem');
+        cy.get('[data-qa="submit-button"]').click();
+        cy.get('div.status.alert.alert-success').should('be.visible').and('have.text', 'Success! Your details have been submitted successfully.');
+
+    });
+
 });
 
