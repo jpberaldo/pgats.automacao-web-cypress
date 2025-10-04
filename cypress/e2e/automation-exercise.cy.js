@@ -2,6 +2,7 @@
 /// <reference types="@cypress/xpath" />
 
 import userData from '../fixtures/validUserData.json';
+import { getTimestamp, getRandomEmail } from '../support/helpers';
 
 describe('Automation Exercise', () => {
 
@@ -15,12 +16,12 @@ describe('Automation Exercise', () => {
     });
 
 
-    it('Test Case 1: Register User', () => {
+    it.only('Test Case 1: Register User', () => {
 
         const timestamp = new Date().getTime();
         cy.get('a[href="/login"]').click();
         cy.get('[data-qa="signup-name"]').type(discardUsername);
-        cy.get('[data-qa="signup-email"]').type(`jp-test-qa-${timestamp}@test.com`);
+        cy.get('[data-qa="signup-email"]').type(getRandomEmail());
         cy.contains('button', 'Signup').click();
 
         //1 forma de interagir com radio button
