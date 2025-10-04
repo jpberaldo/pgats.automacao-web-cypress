@@ -2,7 +2,7 @@
 /// <reference types="@cypress/xpath" />
 
 import userData from '../fixtures/validUserData.json';
-import { getTimestamp, getRandomEmail } from '../support/helpers';
+import { getRandomEmail, getRandomName } from '../support/helpers';
 
 describe('Automation Exercise', () => {
 
@@ -18,9 +18,9 @@ describe('Automation Exercise', () => {
 
     it.only('Test Case 1: Register User', () => {
 
-        const timestamp = new Date().getTime();
+        const username = getRandomName();
         cy.get('a[href="/login"]').click();
-        cy.get('[data-qa="signup-name"]').type(discardUsername);
+        cy.get('[data-qa="signup-name"]').type(username);
         cy.get('[data-qa="signup-email"]').type(getRandomEmail());
         cy.contains('button', 'Signup').click();
 
@@ -56,7 +56,7 @@ describe('Automation Exercise', () => {
         cy.get('b').should('be.visible').and('have.text', 'Account Created!');
 
         cy.get('[data-qa="continue-button"]').click();
-        cy.get('i.fa-user').parent().should('be.visible').and('have.text', ` Logged in as ${discardUsername}`);
+        cy.get('i.fa-user').parent().should('be.visible').and('have.text', ` Logged in as ${username}`);
         cy.get('a[href="/delete_account"]').click();
         cy.get('h2.title.text-center').should('be.visible').and('have.text', 'Account Deleted!');
         cy.get('[data-qa="continue-button"]').click();
