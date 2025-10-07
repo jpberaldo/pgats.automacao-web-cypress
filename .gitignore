@@ -1,3 +1,4 @@
 /node_modules
 /utils.txt
 cypress/e2e/automation-exercise-no-refactor.cy.js
+/reports
