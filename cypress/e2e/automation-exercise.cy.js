@@ -7,9 +7,8 @@ import { getRandomEmail, getRandomName } from '../support/helpers.js';
 import { navigateToLogin, navigateToDeleteAccount, navigateToLogoutUser, navigateToContactUs, navigateToProducts } from '../modules/menu/index.js';
 import { submitPreRegistrationForm, submitLoginForm } from '../modules/login/index.js';
 import { submitPreRegistrationFormWithValidData } from '../modules/register/index.js';
-import { navigateToUserHomePage } from '../modules/accountCreated/index.js';
-import { submitContinueButton } from '../modules/accountDelete/index.js';
 import { submitContactUsForm } from '../modules/contactUs/index.js';
+import { submitContinueButton } from '../modules/common/index.js';
 
 describe('Automation Exercise', () => {
 
@@ -34,8 +33,8 @@ describe('Automation Exercise', () => {
         cy.url().should('includes', 'account_created');
         cy.contains('[data-qa="account-created"]', 'Account Created!');
         cy.get('b').should('be.visible').and('have.text', 'Account Created!');
-
-        navigateToUserHomePage();
+        
+        submitContinueButton();
         cy.get('i.fa-user').parent().should('be.visible').and('have.text', ` Logged in as ${username}`);
 
         navigateToDeleteAccount();
