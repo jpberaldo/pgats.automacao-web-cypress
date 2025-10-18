@@ -6,3 +6,7 @@ cypress/e2e/homework-exercise.cy.js
 cypress/reports
 cypress/screenshots
 cypress/videos
+npm_install_debug.log
+browserstack.json
+/log
+/results
