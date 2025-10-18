@@ -2,6 +2,7 @@
 /utils.txt
 cypress/e2e/automation-exercise-no-refactor.cy.js
 cypress/e2e/automation-exercise-xpath.cy.js
+cypress/e2e/homework-exercise.cy.js
 cypress/reports
 cypress/screenshots
 cypress/videos
