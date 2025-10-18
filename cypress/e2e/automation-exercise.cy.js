@@ -4,7 +4,7 @@
 import validUserData from '../fixtures/validUserData.json';
 import invalidUserData from '../fixtures/invalidUserData.json';
 import { getRandomEmail, getRandomName } from '../support/helpers.js';
-import { navigateToLogin, navigateToDeleteAccount, navigateToLogoutUser, navigateToContactUs } from '../modules/menu/index.js';
+import { navigateToLogin, navigateToDeleteAccount, navigateToLogoutUser, navigateToContactUs, navigateToProducts } from '../modules/menu/index.js';
 import { submitPreRegistrationForm, submitLoginForm } from '../modules/login/index.js';
 import { submitPreRegistrationFormWithValidData } from '../modules/register/index.js';
 import { navigateToUserHomePage } from '../modules/accountCreated/index.js';
@@ -85,6 +85,20 @@ describe('Automation Exercise', () => {
         navigateToContactUs();
         submitContactUsForm();
         cy.get('div.status.alert.alert-success').should('be.visible').and('have.text', 'Success! Your details have been submitted successfully.');
+
+    });
+
+    it.only('Test Case 8: Verify All Products and product detail page', () => {
+
+        navigateToProducts();
+        cy.get('.product-image-wrapper').should('have.length', 34).and('be.visible');
+        cy.get('.fa.fa-plus-square').eq(0).click();
+        cy.xpath('//div[@class="product-information"]//h2').should('be.visible').and('have.text', 'Blue Top');
+        cy.xpath('//div[@class="product-information"]//p').eq(0).should('be.visible').and('have.text', 'Category: Women > Tops');
+        cy.xpath('//div[@class="product-information"]//span[contains(text(),"Rs.")]').should('be.visible').and('have.text', 'Rs. 500');
+        cy.xpath('//div[@class="product-information"]//p[b[text()="Availability:"]]').should('be.visible').and('have.text', 'Availability: In Stock');
+        cy.xpath('//div[@class="product-information"]//p[b[text()="Condition:"]]').should('be.visible').and('have.text', 'Condition: New');
+        cy.xpath('//div[@class="product-information"]//p[b[text()="Brand:"]]').should('be.visible').and('have.text', 'Brand: Polo');
 
     });
 

@@ -1,5 +1,8 @@
 /node_modules
+package-lock.json
 /utils.txt
 cypress/e2e/automation-exercise-no-refactor.cy.js
 cypress/e2e/automation-exercise-xpath.cy.js
 cypress/reports
+cypress/screenshots
+cypress/videos

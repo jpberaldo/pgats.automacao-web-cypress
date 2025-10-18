@@ -13,3 +13,7 @@ export function navigateToLogoutUser() {
 export function navigateToContactUs() {
     cy.get('i.fa.fa-envelope').parent().click(); // ou a[href*=contact] para buscar por uma palavra
 };
+
+export function navigateToProducts() {
+    cy.get('a[href="/products"]').click();
+};
