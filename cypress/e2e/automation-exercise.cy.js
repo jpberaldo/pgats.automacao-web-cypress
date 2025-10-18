@@ -88,7 +88,7 @@ describe('Automation Exercise', () => {
 
     });
 
-    it.only('Test Case 8: Verify All Products and product detail page', () => {
+    it('Test Case 8: Verify All Products and product detail page', () => {
 
         navigateToProducts();
         cy.get('.product-image-wrapper').should('have.length', 34).and('be.visible');
