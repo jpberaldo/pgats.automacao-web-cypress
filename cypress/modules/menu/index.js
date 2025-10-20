@@ -2,7 +2,7 @@ export function navigateToLogin() {
     cy.get('a[href="/login"]').click();
 };
 
-export function navigateToDeleteAccount() {
+export function clickAndNavigateToDeleteAccount() {
     cy.get('a[href="/delete_account"]').click();
 };
 
@@ -16,4 +16,9 @@ export function navigateToContactUs() {
 
 export function navigateToProducts() {
     cy.get('a[href="/products"]').click();
+};
+
+export function submitSubscription(email) {
+    cy.get('input[id="susbscribe_email"]').type(email);
+    cy.get('button[id="subscribe"]').click();
 };
